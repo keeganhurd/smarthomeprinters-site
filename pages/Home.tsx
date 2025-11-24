@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <div>
       {/* Hero Section */}
       <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-24">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
               Simple Home Printers & <br/><span className="text-blue-800 dark:text-blue-400">Smart Home Planning</span>

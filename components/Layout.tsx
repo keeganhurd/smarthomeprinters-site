@@ -133,7 +133,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Mobile Menu Button & Theme Toggle */}
-            <div className="md:hidden flex items-center gap-4">
+            <div className="md:hidden flex items-center gap-2">
+              <a 
+                href={`tel:${COMPANY_INFO.phone.replace(/-/g, '')}`}
+                className="p-2 rounded-full text-pink-600 dark:text-pink-500 hover:bg-pink-50 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Call Us"
+              >
+                <Phone size={20} />
+              </a>
               <button 
                 onClick={toggleTheme}
                 className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -223,10 +230,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
           
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-start items-center gap-4">
-            <span className="text-sm text-slate-500 order-2 md:order-1">&copy; {new Date().getFullYear()} {COMPANY_INFO.legalName}. All rights reserved.</span>
-            <Link to="/login" className="text-slate-600 hover:text-slate-400 flex items-center gap-1 text-xs transition-colors order-1 md:order-2">
+            <Link to="/login" className="text-slate-600 hover:text-slate-400 flex items-center gap-1 text-xs transition-colors order-1 md:order-1">
               <Lock size={10} /> Admin
             </Link>
+            <span className="text-sm text-slate-500 order-2 md:order-2">&copy; {new Date().getFullYear()} {COMPANY_INFO.legalName}. All rights reserved.</span>
           </div>
         </div>
       </footer>
