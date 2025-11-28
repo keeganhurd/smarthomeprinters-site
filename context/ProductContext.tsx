@@ -18,18 +18,18 @@ const INITIAL_PRODUCTS: Product[] = [
       'Compact Minimalist Design: Clean white chassis with matte grey top and vertical paper feed fits neatly on a desk, shelf, or credenza.',
       'Low-Cost Ink Cartridges: Uses replaceable color and black ink cartridges engineered for consistent quality and predictable running costs.'
     ],
-    price: 89.99,
+    price: 79.99,
     listPrice: 129.99,
     rating: 4.8,
     reviewCount: 124,
     amazonUrl: 'https://www.amazon.com/s?k=white+minimalist+printer', 
     isFeatured: true,
     images: [
-      { src: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Front View" },
-      { src: "https://images.unsplash.com/photo-1563770095-39d468f9a51d?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Workspace" },
-      { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Home Office" },
-      { src: "https://images.unsplash.com/photo-1589820296156-2454bb8a6d54?auto=format&fit=crop&w=1500&q=80", alt: "Printing Document" },
-      { src: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1500&q=80", alt: "Product Detail" },
+      { src: "https://m.media-amazon.com/images/I/61gKkYQn6lL._AC_SL1500_.jpg", alt: "HeloJet C200 Front View White" },
+      { src: "https://images.unsplash.com/photo-1589820296156-2454bb8a6d54?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Document Printing" },
+      { src: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Home Office Setup" },
+      { src: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet Product Detail" },
+      { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet Modern Desk" },
     ],
     overview: "The HeloJet C200 redefines home printing with a focus on simplicity and connectivity. Designed for the modern wireless household, this all-in-one inkjet eliminates the clutter of cables while providing robust performance for documents, homework, and creative projects. Its minimalist white and grey aesthetic seamlessly blends into any room decor, from home offices to living room shelves.",
     features: [
@@ -58,14 +58,14 @@ interface ProductContextType {
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // CHANGED KEY to 'helojet_products_v2' to ensure new schema loads
+  // CHANGED KEY to 'helojet_products_v4' to ensure new schema loads and busts old cache
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('helojet_products_v2');
+    const saved = localStorage.getItem('helojet_products_v4');
     return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   useEffect(() => {
-    localStorage.setItem('helojet_products_v2', JSON.stringify(products));
+    localStorage.setItem('helojet_products_v4', JSON.stringify(products));
   }, [products]);
 
   const addProduct = (product: Product) => {

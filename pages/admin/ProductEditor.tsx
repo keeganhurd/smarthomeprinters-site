@@ -239,7 +239,7 @@ const ProductEditor: React.FC = () => {
                 disabled={isLoadingAI}
                 className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 disabled:opacity-50 flex items-center gap-2"
               >
-                {isLoadingAI ? 'Crawling...' : 'Generate Page'}
+                {isLoadingAI ? 'Crawling...' : 'Auto-Generate with AI'}
               </button>
             </div>
           </div>

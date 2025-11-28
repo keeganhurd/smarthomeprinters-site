@@ -93,7 +93,7 @@ const Home: React.FC = () => {
             <div className="mt-8 lg:mt-0 lg:w-1/3">
               <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-8 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80" 
+                  src="https://m.media-amazon.com/images/I/61gKkYQn6lL._AC_SL1500_.jpg" 
                   alt="HeloJet C200 Printer" 
                   className="rounded shadow-md hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
