@@ -16,23 +16,23 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-24">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
-              Simple Home Printers & <br/><span className="text-blue-800 dark:text-blue-400">Smart Home Planning</span>
+              Meet the <span className="text-blue-800 dark:text-blue-400">HeloJet C200</span> & <br/>Smart Home Planning
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-              We simplify technology purchasing. Get the right hardware for your home office without the confusion. Professional sales and consultation.
+              We simplify technology purchasing. Get the right hardware for your home office without the confusion.
             </p>
             
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 p-4 rounded-lg mb-10 max-w-2xl mx-auto text-sm text-red-800 dark:text-red-200">
-              <strong>Notice:</strong> We are a retailer and planning service. We do not provide technical support, virus removal, or repair services.
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/30 p-4 rounded-lg mb-10 max-w-2xl mx-auto text-sm text-blue-800 dark:text-blue-200">
+              <strong>Official Store:</strong> We are the official retailer and support provider for HeloJet printers. Purchase with confidence.
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
-                to="/product/hp-deskjet-4255e" 
+                to="/product/helojet-c200" 
                 className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-sm"
               >
                 <Printer className="mr-2 -ml-1 h-5 w-5" />
-                Featured Printer
+                View HeloJet C200
               </Link>
               <Link 
                 to="/book-appointment" 
@@ -54,8 +54,8 @@ const Home: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 rounded-lg flex items-center justify-center mb-6">
                 <Printer size={24} />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Curated Selection</h3>
-              <p className="text-slate-600 dark:text-slate-400">We don't overwhelm you with thousands of options. We only stock and recommend the most reliable, easy-to-use home printers.</p>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Modern Design</h3>
+              <p className="text-slate-600 dark:text-slate-400">The HeloJet C200 is built for the modern home. Sleek, minimalist, and powerful.</p>
             </div>
 
             <div className="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
@@ -82,19 +82,19 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="lg:w-1/2">
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Featured: HP DeskJet 4255e</h2>
+              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">Featured: HeloJet C200</h2>
               <p className="text-lg text-slate-600 dark:text-slate-300 mb-6">
-                The perfect all-in-one solution for home offices. Wireless printing, scanning, and easy setup via smartphone.
+                The perfect all-in-one solution for home offices. Minimalist footprint, wireless connectivity, and high-yield efficiency.
               </p>
-              <Link to="/product/hp-deskjet-4255e" className="text-blue-800 dark:text-blue-400 font-semibold hover:underline inline-flex items-center">
+              <Link to="/product/helojet-c200" className="text-blue-800 dark:text-blue-400 font-semibold hover:underline inline-flex items-center">
                 View Product Details <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
             <div className="mt-8 lg:mt-0 lg:w-1/3">
               <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-8 flex items-center justify-center">
                 <img 
-                  src="https://images-na.ssl-images-amazon.com/images/I/61Zl5g5yJdL.jpg" 
-                  alt="HP DeskJet Printer" 
+                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80" 
+                  alt="HeloJet C200 Printer" 
                   className="rounded shadow-md hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                   onError={handleImageError}

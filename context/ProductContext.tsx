@@ -1,33 +1,35 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product } from '../types';
 
-// Initial seed data (The HP Printer)
+// Initial seed data (HeloJet C200)
 const INITIAL_PRODUCTS: Product[] = [
   {
     id: '1',
-    slug: 'hp-deskjet-4255e',
-    asin: 'B0CT2QHQVF',
-    title: 'HP DeskJet 4255e Wireless All-in-One Color Inkjet Printer, Scanner, Copier, Best-for-Home, 3 Month Instant Ink Trial Included, AI-Enabled (588S6A)',
-    shortDescription: 'The perfect all-in-one solution for home offices. Wireless printing, scanning, and easy setup via smartphone.',
+    slug: 'helojet-c200',
+    asin: 'HELOJET200',
+    title: 'HeloJet C200 Wireless Smart Printer - All-in-One Home Office Solution',
+    shortDescription: 'The HeloJet C200 is a compact wireless smart printer built for modern homes and small offices. Enjoy fast, reliable color printing, copying, and scanning from any device with simple Wi-Fi setup and quiet, energy-efficient performance.',
     description: [
-      'Simple, Stress-Free Printing: Best for home to print basic color documents like recipes, forms, and travel documents.',
-      'Key Features: Print, copy, scan, wireless, auto document feeder, mobile fax.',
-      'Includes 3 Months Instant Ink: Subscribe to Instant Ink within 7 days of setting up the printer to get your first 3 months included.',
-      'Wireless Connectivity: Dual-band Wi-Fi® with self-reset automatically detects and resolves connectivity issues.',
-      'HP App: Print, scan, copy, or fax right from your smartphone with the easiest-to-use print app.'
+      'Wireless All-in-One Printer: Print, copy, and scan from one compact color inkjet designed for home offices, students, and families.',
+      'Easy Wi-Fi Setup: Connect to your home network in minutes and print wirelessly from laptops, phones, and tablets (iOS, Android, Windows, and macOS).',
+      'Smart Mobile Printing: Send documents and photos to your HeloJet C200 from anywhere in your home using the companion app—no USB cable required.',
+      'Crisp Color & Black Text: 0.92-inch wide print head delivers sharp black documents and vibrant color prints for schoolwork, photos, and everyday pages.',
+      'Eco-Smart & Quiet: Auto-sleep mode reduces power usage when idle, and Quiet Mode keeps noise low so you can work, study, or sleep without distraction.',
+      'Compact Minimalist Design: Clean white chassis with matte grey top and vertical paper feed fits neatly on a desk, shelf, or credenza.',
+      'Low-Cost Ink Cartridges: Uses replaceable color and black ink cartridges engineered for consistent quality and predictable running costs.'
     ],
-    price: 79.89,
-    listPrice: 109.99,
-    rating: 4.5,
-    reviewCount: 4967,
-    amazonUrl: 'https://www.amazon.com/HP-DeskJet-Wireless-included-588S6A/dp/B0CT2QHQVF',
+    price: 89.99,
+    listPrice: 129.99,
+    rating: 4.8,
+    reviewCount: 124,
+    amazonUrl: 'https://www.amazon.com/s?k=white+minimalist+printer', // Placeholder or generic search until actual ASIN is live
     isFeatured: true,
     images: [
-      { src: "https://m.media-amazon.com/images/I/61Zl5g5yJdL._AC_SL1500_.jpg", alt: "HP DeskJet 4255e Front" },
-      { src: "https://m.media-amazon.com/images/I/71wX7w7yM9L._AC_SL1500_.jpg", alt: "Lifestyle usage" },
-      { src: "https://m.media-amazon.com/images/I/71i4D7-C7UL._AC_SL1500_.jpg", alt: "Dimensions" },
-      { src: "https://m.media-amazon.com/images/I/71O3rLhJ33L._AC_SL1500_.jpg", alt: "In the box" },
-      { src: "https://m.media-amazon.com/images/I/712SBK+h8iL._AC_SL1500_.jpg", alt: "App usage" },
+      { src: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Front View" },
+      { src: "https://images.unsplash.com/photo-1563770095-39d468f9a51d?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Workspace" },
+      { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Home Office" },
+      { src: "https://images.unsplash.com/photo-1589820296156-2454bb8a6d54?auto=format&fit=crop&w=1500&q=80", alt: "Printing Document" },
+      { src: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1500&q=80", alt: "Product Detail" },
     ]
   }
 ];

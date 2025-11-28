@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Phone, Home as HomeIcon, Sun, Moon, Lock } from 'lucide-react';
+import { Menu, X, Phone, Printer as PrinterIcon, Sun, Moon, Lock } from 'lucide-react';
 import { COMPANY_INFO } from '../types';
 
 interface LayoutProps {
@@ -74,7 +74,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navItems = [
     { label: 'Home', path: '/' },
-    { label: 'Featured Printer', path: '/product/hp-deskjet-4255e' },
+    { label: 'HeloJet C200', path: '/product/helojet-c200' },
     { label: 'Smart Home Plans', path: '/smart-home' },
     { label: 'Book Consultation', path: '/book-appointment' },
     { label: 'Contact', path: '/contact' },
@@ -90,11 +90,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-2">
                 <div className="bg-blue-800 text-white p-2 rounded-md">
-                  <HomeIcon size={24} />
+                  <PrinterIcon size={24} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-bold text-xl text-slate-900 dark:text-white leading-tight">SmartHomePrinters</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 tracking-wide uppercase">Sales & Planning Only</span>
+                  <span className="font-bold text-2xl text-slate-900 dark:text-white leading-tight tracking-tight">HeloJet</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 tracking-wide uppercase">Print Smart. Live Simple.</span>
                 </div>
               </Link>
             </div>
@@ -189,7 +189,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Amazon Disclosure Banner */}
       <div className="bg-amber-50 dark:bg-amber-950 border-t border-amber-200 dark:border-amber-900 p-3 text-center text-xs text-amber-900 dark:text-amber-200">
-        <p><strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases. SmartHomePrinters.com is an independent retailer and planner.</p>
+        <p><strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases made through links on this site. Some HeloJet products may be fulfilled by Amazon or other logistics partners.</p>
       </div>
 
       {/* Footer */}
@@ -198,7 +198,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* Contact */}
             <div>
-              <h3 className="text-white text-lg font-bold mb-4">Contact Us</h3>
+              <h3 className="text-white text-lg font-bold mb-4">Contact HeloJet</h3>
               <p className="mb-2">{COMPANY_INFO.legalName}</p>
               <p className="mb-2">{COMPANY_INFO.address}</p>
               <p className="mb-2"><a href={`tel:${COMPANY_INFO.phone}`} className="hover:text-white">{COMPANY_INFO.phone}</a></p>
@@ -220,11 +220,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-white text-lg font-bold mb-4">Important Disclaimer</h3>
               <p className="text-sm leading-relaxed mb-4">
-                SmartHomePrinters.com is an independent retailer and consultancy. We are <strong>NOT</strong> affiliated with HP, Microsoft, Apple, or any other manufacturer.
+                HeloJet is an independent printer brand and is not affiliated with or endorsed by HP, Canon, Brother, Epson, or any other third-party manufacturer. All third-party names and trademarks are used for identification and comparison purposes only.
               </p>
               <div className="bg-slate-800 dark:bg-slate-900 p-3 rounded border border-slate-700">
                 <p className="text-xs font-medium text-slate-400 uppercase mb-1">Service Notice</p>
-                <p className="text-sm text-white">We DO NOT provide technical support, repair services, or remote device access. We sell hardware and provide purchase planning consultations only.</p>
+                <p className="text-sm text-white">We provide setup assistance, troubleshooting, and remote support only for HeloJet-branded products and services. We do not provide technical support, repair services, or remote access for printers or devices from other manufacturers.</p>
               </div>
             </div>
           </div>

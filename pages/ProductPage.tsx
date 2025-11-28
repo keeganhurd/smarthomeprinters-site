@@ -257,14 +257,48 @@ const ProductPage: React.FC = () => {
           </div>
 
         </div>
+
+        {/* Long-form SEO Content */}
+        <div className="mt-12 max-w-4xl mx-auto prose dark:prose-invert border-t border-slate-200 dark:border-slate-800 pt-12">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Product Overview</h2>
+          <p className="text-slate-700 dark:text-slate-300 mb-8">
+            The HeloJet C200 redefines home printing with a focus on simplicity and connectivity. Designed for the modern wireless household, this all-in-one inkjet eliminates the clutter of cables while providing robust performance for documents, homework, and creative projects. Its minimalist white and grey aesthetic seamlessly blends into any room decor, from home offices to living room shelves.
+          </p>
+
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Key Features & Benefits</h2>
+          <div className="text-slate-700 dark:text-slate-300 mb-8 space-y-4">
+            <p>
+              <strong>Wireless Freedom:</strong> Utilizing advanced Wi-Fi technology, the C200 allows you to print from any room. Whether you are on a laptop in the study or a smartphone in the kitchen, your documents are just a tap away.
+            </p>
+            <p>
+              <strong>Compact Footprint:</strong> Space is a premium in many homes. The C200 features a vertical paper feed and retractable trays, minimizing its desk footprint when not in use.
+            </p>
+            <p>
+              <strong>High-Quality Imaging:</strong> Equipped with a precision 0.92-inch print head, the printer produces sharp, legible text and vivid colors, ensuring your presentations and photos look professional.
+            </p>
+          </div>
+
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Who the HeloJet C200 Is Perfect For</h2>
+          <ul className="list-disc pl-5 text-slate-700 dark:text-slate-300 mb-8 space-y-2">
+            <li><strong>Remote Workers:</strong> Reliable scanning and printing for contracts and reports.</li>
+            <li><strong>Students:</strong> Fast, color-rich output for essays and school projects.</li>
+            <li><strong>Families:</strong> Easy mobile printing for everyone in the house without managing cables.</li>
+            <li><strong>Minimalists:</strong> A device that looks good and works well without taking up unnecessary space.</li>
+          </ul>
+
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">HeloJet Setup & Support</h2>
+          <p className="text-slate-700 dark:text-slate-300 mb-8">
+            Setting up the HeloJet C200 is straightforward using the downloadable companion app, which guides you through connecting to your Wi-Fi network. <strong>Please Note:</strong> HeloJet.me is the official online store and support site for HeloJet™ printers and accessories. We provide full setup assistance and support for our hardware. For warranty claims or technical troubleshooting, you may contact our support team or refer to the documentation included in the box.
+          </p>
+        </div>
         
-        {/* Independent Retailer Disclosure Section */}
+        {/* Independent Manufacturer & Retailer Notice Section */}
         <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">
           <div className="flex items-start gap-3 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md text-blue-900 dark:text-blue-200 text-sm">
              <AlertCircle className="h-5 w-5 text-blue-800 dark:text-blue-400 flex-shrink-0" />
              <div>
-               <p className="font-semibold mb-1">Independent Retailer Notice</p>
-               <p>SmartHomePrinters.com is an independent retailer. We provide planning and purchase assistance. We do not manufacture this product. Warranty claims, technical support, and returns must be handled via Amazon or HP directly.</p>
+               <p className="font-semibold mb-1">Independent Manufacturer & Retailer Notice</p>
+               <p>HeloJet.me is the official online store and support site for HeloJet™ printers and accessories. We design and brand HeloJet hardware and work with trusted fulfillment partners (including Amazon) to deliver products to our customers. When a HeloJet printer is purchased through Amazon, HeloJet remains the manufacturer of record; Amazon’s policies apply to shipping and returns for orders placed on their platform.</p>
              </div>
           </div>
         </div>

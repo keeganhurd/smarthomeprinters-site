@@ -32,9 +32,9 @@ export interface Product {
 }
 
 export const COMPANY_INFO = {
-  name: "SmartHomePrinters.com",
-  legalName: "Cyber Secured AI Systems LLC",
+  name: "HeloJet",
+  legalName: "HeloJet Systems LLC",
   phone: "888-416-9212",
   address: "132 W International Speedway Blvd #44, Daytona Beach, FL 32114",
-  email: "info@smarthomeprinters.com"
+  email: "info@helojet.me"
 };

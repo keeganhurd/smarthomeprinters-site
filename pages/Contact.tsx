@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
                       {COMPANY_INFO.phone}
                     </a>
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">Sales inquiries only. No tech support.</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">Sales & Official Support</p>
                 </div>
               </div>
 
