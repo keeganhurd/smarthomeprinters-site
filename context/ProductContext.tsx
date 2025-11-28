@@ -30,7 +30,20 @@ const INITIAL_PRODUCTS: Product[] = [
       { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Home Office" },
       { src: "https://images.unsplash.com/photo-1589820296156-2454bb8a6d54?auto=format&fit=crop&w=1500&q=80", alt: "Printing Document" },
       { src: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1500&q=80", alt: "Product Detail" },
-    ]
+    ],
+    overview: "The HeloJet C200 redefines home printing with a focus on simplicity and connectivity. Designed for the modern wireless household, this all-in-one inkjet eliminates the clutter of cables while providing robust performance for documents, homework, and creative projects. Its minimalist white and grey aesthetic seamlessly blends into any room decor, from home offices to living room shelves.",
+    features: [
+      "Wireless Freedom: Utilizing advanced Wi-Fi technology, the C200 allows you to print from any room. Whether you are on a laptop in the study or a smartphone in the kitchen, your documents are just a tap away.",
+      "Compact Footprint: Space is a premium in many homes. The C200 features a vertical paper feed and retractable trays, minimizing its desk footprint when not in use.",
+      "High-Quality Imaging: Equipped with a precision 0.92-inch print head, the printer produces sharp, legible text and vivid colors, ensuring your presentations and photos look professional."
+    ],
+    targetAudience: [
+      "Remote Workers: Reliable scanning and printing for contracts and reports.",
+      "Students: Fast, color-rich output for essays and school projects.",
+      "Families: Easy mobile printing for everyone in the house without managing cables.",
+      "Minimalists: A device that looks good and works well without taking up unnecessary space."
+    ],
+    setupText: "Setting up the HeloJet C200 is straightforward using the downloadable companion app, which guides you through connecting to your Wi-Fi network. Please Note: HeloJet.me is the official online store and support site for HeloJet™ printers and accessories. We provide full setup assistance and support for our hardware. For warranty claims or technical troubleshooting, you may contact our support team or refer to the documentation included in the box."
   }
 ];
 
@@ -45,14 +58,14 @@ interface ProductContextType {
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // CHANGED KEY to 'helojet_products_v1' to invalidate old 'shp_products' cache
+  // CHANGED KEY to 'helojet_products_v2' to ensure new schema loads
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('helojet_products_v1');
+    const saved = localStorage.getItem('helojet_products_v2');
     return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   useEffect(() => {
-    localStorage.setItem('helojet_products_v1', JSON.stringify(products));
+    localStorage.setItem('helojet_products_v2', JSON.stringify(products));
   }, [products]);
 
   const addProduct = (product: Product) => {

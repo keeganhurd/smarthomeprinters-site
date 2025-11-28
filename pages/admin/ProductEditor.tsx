@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Wand2, Save, X, Plus, Trash, Upload, Link as LinkIcon, GripHorizontal } from 'lucide-react';
+import { Wand2, Save, X, Plus, Trash, Upload, Link as LinkIcon, GripHorizontal, FileText } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import { Product, ProductImage } from '../../types';
 import AdminLayout from './AdminLayout';
@@ -28,6 +28,11 @@ const ProductEditor: React.FC = () => {
     reviewCount: 100,
     images: [],
     amazonUrl: '',
+    // New fields default
+    overview: '',
+    features: [''],
+    targetAudience: [''],
+    setupText: ''
   };
 
   const [formData, setFormData] = useState<Product>(initialProduct);
@@ -35,7 +40,16 @@ const ProductEditor: React.FC = () => {
   useEffect(() => {
     if (id) {
       const found = products.find(p => p.id === id);
-      if (found) setFormData(found);
+      if (found) {
+        // Ensure arrays exist even if old data
+        setFormData({
+          ...found,
+          features: found.features || [''],
+          targetAudience: found.targetAudience || [''],
+          overview: found.overview || '',
+          setupText: found.setupText || ''
+        });
+      }
     } else {
       // Generate random ID for new product
       setFormData(prev => ({ ...prev, id: Math.random().toString(36).substr(2, 9) }));
@@ -52,20 +66,20 @@ const ProductEditor: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: parseFloat(value) }));
   };
 
-  const handleBulletChange = (index: number, value: string) => {
-    const newDesc = [...formData.description];
-    newDesc[index] = value;
-    setFormData(prev => ({ ...prev, description: newDesc }));
+  const handleArrayChange = (field: 'description' | 'features' | 'targetAudience', index: number, value: string) => {
+    const newArray = [...(formData[field] || [])];
+    newArray[index] = value;
+    setFormData(prev => ({ ...prev, [field]: newArray }));
   };
 
-  const addBullet = () => {
-    setFormData(prev => ({ ...prev, description: [...prev.description, ''] }));
+  const addArrayItem = (field: 'description' | 'features' | 'targetAudience') => {
+    setFormData(prev => ({ ...prev, [field]: [...(prev[field] || []), ''] }));
   };
 
-  const removeBullet = (index: number) => {
-    const newDesc = [...formData.description];
-    newDesc.splice(index, 1);
-    setFormData(prev => ({ ...prev, description: newDesc }));
+  const removeArrayItem = (field: 'description' | 'features' | 'targetAudience', index: number) => {
+    const newArray = [...(formData[field] || [])];
+    newArray.splice(index, 1);
+    setFormData(prev => ({ ...prev, [field]: newArray }));
   };
 
   const handleImageAddUrl = () => {
@@ -110,13 +124,11 @@ const ProductEditor: React.FC = () => {
   // --- Drag and Drop Logic ---
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
     setDraggedIndex(index);
-    // Required for Firefox to allow drag
     e.dataTransfer.effectAllowed = "move";
-    // Optional: Set a transparent drag image or customize it here
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>, index: number) => {
-    e.preventDefault(); // Necessary to allow dropping
+    e.preventDefault();
     e.dataTransfer.dropEffect = "move";
   };
 
@@ -127,9 +139,7 @@ const ProductEditor: React.FC = () => {
     const updatedImages = [...formData.images];
     const itemToMove = updatedImages[draggedIndex];
 
-    // Remove from old position
     updatedImages.splice(draggedIndex, 1);
-    // Insert at new position
     updatedImages.splice(targetIndex, 0, itemToMove);
 
     setFormData(prev => ({ ...prev, images: updatedImages }));
@@ -151,8 +161,6 @@ const ProductEditor: React.FC = () => {
     // Simulate AI Processing Delay
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // Construct Amazon Main Image URL based on ASIN pattern
-    // This endpoint reliably returns the main product image for most ASINs
     const mainImageUrl = `https://images-na.ssl-images-amazon.com/images/P/${asin}.01._SCLZZZZZZZ_.jpg`;
 
     // Simulate AI Data Generation with 5 images total
@@ -173,13 +181,24 @@ const ProductEditor: React.FC = () => {
       slug: `product-${asin.toLowerCase()}`,
       images: [
         { src: mainImageUrl, alt: "Main Product View" },
-        // Since we can't scrape specific secondary hashes without a backend, we populate high-quality generic placeholders
-        // that you can swap out. This fulfills the "4-6 images" request visually.
         { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80", alt: "Lifestyle Office Context" },
         { src: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1000&q=80", alt: "Product Detail Shot" },
         { src: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1000&q=80", alt: "Usage Context" },
         { src: "https://images.unsplash.com/photo-1629757697332-9cb52c418706?auto=format&fit=crop&w=1000&q=80", alt: "Packaging / In the Box" }
-      ]
+      ],
+      // Fill simulated SEO content
+      overview: "Experience the next level of smart home integration with this device. It combines sleek aesthetics with powerful performance, ensuring it not only looks good but works flawlessly.",
+      features: [
+        "Voice Control: Compatible with major voice assistants.",
+        "Automated Scheduling: Set routines to automate your day.",
+        "Remote Access: Control from anywhere via the cloud."
+      ],
+      targetAudience: [
+        "Tech Enthusiasts: Love bleeding edge tech.",
+        "Busy Families: Need automation to save time.",
+        "Remote Workers: Enhance productivity."
+      ],
+      setupText: "Setup takes less than 5 minutes. Download the app, scan the QR code on the device, and follow the on-screen instructions."
     };
 
     setFormData(prev => ({ ...prev, ...simulatedData }));
@@ -223,13 +242,10 @@ const ProductEditor: React.FC = () => {
                 {isLoadingAI ? 'Crawling...' : 'Generate Page'}
               </button>
             </div>
-            <p className="text-xs text-slate-500 mt-2">
-              Auto-extracts ASIN to fetch main image and populates 5 total image slots with context-aware placeholders.
-            </p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -237,7 +253,7 @@ const ProductEditor: React.FC = () => {
               <input type="text" name="title" required value={formData.title} onChange={handleChange} className="w-full p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">URL Slug (e.g. hp-printer-4000)</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">URL Slug</label>
               <input type="text" name="slug" required value={formData.slug} onChange={handleChange} className="w-full p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white" />
             </div>
           </div>
@@ -268,24 +284,82 @@ const ProductEditor: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Bullet Points (Product Page)</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Bullet Points (Above Fold)</label>
             {formData.description.map((bullet, idx) => (
               <div key={idx} className="flex gap-2 mb-2">
                 <input 
                   type="text" 
                   value={bullet} 
-                  onChange={(e) => handleBulletChange(idx, e.target.value)}
+                  onChange={(e) => handleArrayChange('description', idx, e.target.value)}
                   className="flex-1 p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white"
                 />
-                <button type="button" onClick={() => removeBullet(idx)} className="text-red-500 hover:text-red-700"><X size={20} /></button>
+                <button type="button" onClick={() => removeArrayItem('description', idx)} className="text-red-500 hover:text-red-700"><X size={20} /></button>
               </div>
             ))}
-            <button type="button" onClick={addBullet} className="text-sm text-blue-600 dark:text-blue-400 flex items-center gap-1 mt-2">
+            <button type="button" onClick={() => addArrayItem('description')} className="text-sm text-blue-600 dark:text-blue-400 flex items-center gap-1 mt-2">
               <Plus size={16} /> Add Bullet Point
             </button>
           </div>
 
-          <div>
+          {/* Long Form SEO Section */}
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
+            <h3 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <FileText className="text-blue-600" size={20} />
+              Long-Form SEO Content (Lower Page)
+            </h3>
+            
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Product Overview</label>
+                <textarea name="overview" rows={4} value={formData.overview} onChange={handleChange} className="w-full p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white" placeholder="Detailed intro paragraph..." />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Key Features & Benefits (List)</label>
+                {formData.features?.map((item, idx) => (
+                  <div key={idx} className="flex gap-2 mb-2">
+                    <input 
+                      type="text" 
+                      value={item} 
+                      onChange={(e) => handleArrayChange('features', idx, e.target.value)}
+                      className="flex-1 p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white"
+                      placeholder="Title: Description"
+                    />
+                    <button type="button" onClick={() => removeArrayItem('features', idx)} className="text-red-500 hover:text-red-700"><X size={20} /></button>
+                  </div>
+                ))}
+                <button type="button" onClick={() => addArrayItem('features')} className="text-sm text-blue-600 dark:text-blue-400 flex items-center gap-1 mt-2">
+                  <Plus size={16} /> Add Feature Paragraph
+                </button>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Target Audience (List)</label>
+                {formData.targetAudience?.map((item, idx) => (
+                  <div key={idx} className="flex gap-2 mb-2">
+                    <input 
+                      type="text" 
+                      value={item} 
+                      onChange={(e) => handleArrayChange('targetAudience', idx, e.target.value)}
+                      className="flex-1 p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white"
+                      placeholder="Audience: Why it's good for them"
+                    />
+                    <button type="button" onClick={() => removeArrayItem('targetAudience', idx)} className="text-red-500 hover:text-red-700"><X size={20} /></button>
+                  </div>
+                ))}
+                <button type="button" onClick={() => addArrayItem('targetAudience')} className="text-sm text-blue-600 dark:text-blue-400 flex items-center gap-1 mt-2">
+                  <Plus size={16} /> Add Audience Item
+                </button>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Setup & Support Text</label>
+                <textarea name="setupText" rows={3} value={formData.setupText} onChange={handleChange} className="w-full p-2 rounded border dark:bg-slate-900 dark:border-slate-600 dark:text-white" placeholder="Support policy details..." />
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Images (Drag to Reorder)</label>
             
             {/* Hidden File Input */}
@@ -310,12 +384,7 @@ const ProductEditor: React.FC = () => {
                   }`}
                 >
                   <img src={img.src} alt={img.alt} className="max-w-full max-h-full object-contain pointer-events-none" />
-                  
-                  {/* Grip Icon */}
-                  <div className="absolute top-1 left-1 text-slate-300">
-                    <GripHorizontal size={14} />
-                  </div>
-
+                  <div className="absolute top-1 left-1 text-slate-300"><GripHorizontal size={14} /></div>
                   <button 
                     type="button" 
                     onClick={() => handleImageRemove(idx)}
@@ -326,7 +395,6 @@ const ProductEditor: React.FC = () => {
                 </div>
               ))}
               
-              {/* Upload Button */}
               <button 
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
@@ -336,7 +404,6 @@ const ProductEditor: React.FC = () => {
                 <span className="text-xs font-medium">Upload File</span>
               </button>
 
-              {/* Add URL Button */}
               <button 
                 type="button"
                 onClick={handleImageAddUrl}

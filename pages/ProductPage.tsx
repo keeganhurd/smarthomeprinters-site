@@ -36,6 +36,21 @@ const ProductPage: React.FC = () => {
     e.currentTarget.onerror = null;
   };
 
+  // Helper to bold text before the first colon (e.g. "Title: Description")
+  const renderWithBoldKey = (text: string) => {
+    const parts = text.split(':');
+    if (parts.length > 1) {
+      const title = parts[0];
+      const rest = parts.slice(1).join(':');
+      return (
+        <>
+          <strong>{title}:</strong>{rest}
+        </>
+      );
+    }
+    return text;
+  };
+
   // Calculate savings
   const savings = product.listPrice - product.price;
   const savingsPercent = Math.round((savings / product.listPrice) * 100);
@@ -258,39 +273,55 @@ const ProductPage: React.FC = () => {
 
         </div>
 
-        {/* Long-form SEO Content */}
-        <div className="mt-12 max-w-4xl mx-auto prose dark:prose-invert border-t border-slate-200 dark:border-slate-800 pt-12">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Product Overview</h2>
-          <p className="text-slate-700 dark:text-slate-300 mb-8">
-            The HeloJet C200 redefines home printing with a focus on simplicity and connectivity. Designed for the modern wireless household, this all-in-one inkjet eliminates the clutter of cables while providing robust performance for documents, homework, and creative projects. Its minimalist white and grey aesthetic seamlessly blends into any room decor, from home offices to living room shelves.
-          </p>
+        {/* Long-form SEO Content (Dynamic) */}
+        {(product.overview || (product.features && product.features.length > 0) || (product.targetAudience && product.targetAudience.length > 0) || product.setupText) && (
+          <div className="mt-12 max-w-4xl mx-auto prose dark:prose-invert border-t border-slate-200 dark:border-slate-800 pt-12">
+            
+            {product.overview && (
+              <>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Product Overview</h2>
+                <p className="text-slate-700 dark:text-slate-300 mb-8 whitespace-pre-wrap">
+                  {product.overview}
+                </p>
+              </>
+            )}
 
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Key Features & Benefits</h2>
-          <div className="text-slate-700 dark:text-slate-300 mb-8 space-y-4">
-            <p>
-              <strong>Wireless Freedom:</strong> Utilizing advanced Wi-Fi technology, the C200 allows you to print from any room. Whether you are on a laptop in the study or a smartphone in the kitchen, your documents are just a tap away.
-            </p>
-            <p>
-              <strong>Compact Footprint:</strong> Space is a premium in many homes. The C200 features a vertical paper feed and retractable trays, minimizing its desk footprint when not in use.
-            </p>
-            <p>
-              <strong>High-Quality Imaging:</strong> Equipped with a precision 0.92-inch print head, the printer produces sharp, legible text and vivid colors, ensuring your presentations and photos look professional.
-            </p>
+            {product.features && product.features.length > 0 && (
+              <>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Key Features & Benefits</h2>
+                <div className="text-slate-700 dark:text-slate-300 mb-8 space-y-4">
+                  {product.features.map((feature, idx) => (
+                    <p key={idx}>
+                      {renderWithBoldKey(feature)}
+                    </p>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {product.targetAudience && product.targetAudience.length > 0 && (
+              <>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Who the {product.title.split(' ')[0]} Is Perfect For</h2>
+                <ul className="list-disc pl-5 text-slate-700 dark:text-slate-300 mb-8 space-y-2">
+                  {product.targetAudience.map((item, idx) => (
+                    <li key={idx}>
+                      {renderWithBoldKey(item)}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.setupText && (
+               <>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Setup & Support</h2>
+                <p className="text-slate-700 dark:text-slate-300 mb-8 whitespace-pre-wrap">
+                  {product.setupText}
+                </p>
+               </>
+            )}
           </div>
-
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Who the HeloJet C200 Is Perfect For</h2>
-          <ul className="list-disc pl-5 text-slate-700 dark:text-slate-300 mb-8 space-y-2">
-            <li><strong>Remote Workers:</strong> Reliable scanning and printing for contracts and reports.</li>
-            <li><strong>Students:</strong> Fast, color-rich output for essays and school projects.</li>
-            <li><strong>Families:</strong> Easy mobile printing for everyone in the house without managing cables.</li>
-            <li><strong>Minimalists:</strong> A device that looks good and works well without taking up unnecessary space.</li>
-          </ul>
-
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">HeloJet Setup & Support</h2>
-          <p className="text-slate-700 dark:text-slate-300 mb-8">
-            Setting up the HeloJet C200 is straightforward using the downloadable companion app, which guides you through connecting to your Wi-Fi network. <strong>Please Note:</strong> HeloJet.me is the official online store and support site for HeloJet™ printers and accessories. We provide full setup assistance and support for our hardware. For warranty claims or technical troubleshooting, you may contact our support team or refer to the documentation included in the box.
-          </p>
-        </div>
+        )}
         
         {/* Independent Manufacturer & Retailer Notice Section */}
         <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">

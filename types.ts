@@ -29,6 +29,12 @@ export interface Product {
   images: ProductImage[];
   amazonUrl: string;
   isFeatured?: boolean;
+  
+  // Long-form SEO Content
+  overview?: string;
+  features?: string[];
+  targetAudience?: string[];
+  setupText?: string;
 }
 
 export const COMPANY_INFO = {
