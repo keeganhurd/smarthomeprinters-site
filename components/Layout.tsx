@@ -23,7 +23,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   // Load and inject Custom Chat Widget Code from LocalStorage
   useEffect(() => {
-    const savedSettings = localStorage.getItem('shp_site_settings');
+    // CHANGED KEY to 'helojet_settings'
+    const savedSettings = localStorage.getItem('helojet_settings');
     if (savedSettings) {
       try {
         const { chatWidgetCode } = JSON.parse(savedSettings);

@@ -10,14 +10,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('shp_auth') === 'true';
+    // CHANGED KEY to 'helojet_auth'
+    return localStorage.getItem('helojet_auth') === 'true';
   });
 
   const login = (email: string, pass: string) => {
     // Hardcoded credentials as requested
     if (email === 'hello@cybersecured.app' && pass === 'YeshuaisKing1$') {
       setIsAuthenticated(true);
-      localStorage.setItem('shp_auth', 'true');
+      localStorage.setItem('helojet_auth', 'true');
       return true;
     }
     return false;
@@ -25,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('shp_auth');
+    localStorage.removeItem('helojet_auth');
   };
 
   return (

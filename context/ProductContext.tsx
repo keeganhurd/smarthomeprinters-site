@@ -22,7 +22,7 @@ const INITIAL_PRODUCTS: Product[] = [
     listPrice: 129.99,
     rating: 4.8,
     reviewCount: 124,
-    amazonUrl: 'https://www.amazon.com/s?k=white+minimalist+printer', // Placeholder or generic search until actual ASIN is live
+    amazonUrl: 'https://www.amazon.com/s?k=white+minimalist+printer', 
     isFeatured: true,
     images: [
       { src: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1500&q=80", alt: "HeloJet C200 Front View" },
@@ -45,13 +45,14 @@ interface ProductContextType {
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // CHANGED KEY to 'helojet_products_v1' to invalidate old 'shp_products' cache
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('shp_products');
+    const saved = localStorage.getItem('helojet_products_v1');
     return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   useEffect(() => {
-    localStorage.setItem('shp_products', JSON.stringify(products));
+    localStorage.setItem('helojet_products_v1', JSON.stringify(products));
   }, [products]);
 
   const addProduct = (product: Product) => {

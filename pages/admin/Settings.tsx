@@ -7,7 +7,8 @@ const Settings: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    const savedSettings = localStorage.getItem('shp_site_settings');
+    // CHANGED KEY to 'helojet_settings'
+    const savedSettings = localStorage.getItem('helojet_settings');
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings);
@@ -23,7 +24,8 @@ const Settings: React.FC = () => {
     const settings = {
       chatWidgetCode: chatCode
     };
-    localStorage.setItem('shp_site_settings', JSON.stringify(settings));
+    // CHANGED KEY to 'helojet_settings'
+    localStorage.setItem('helojet_settings', JSON.stringify(settings));
     
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
